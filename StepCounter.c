@@ -6,8 +6,8 @@
 // Struct moved to header file
 
 // Define any additional variables here
-// Global variables for filename and FITNESS_DATA array
 
+// Global variables for filename and FITNESS_DATA array
 
 // This is your helper function. Do not change it in any way.
 // Inputs: character array representing a row; the delimiter character
@@ -42,5 +42,48 @@ void tokeniseRecord(const char *input, const char *delimiter,
 
 // Complete the main function
 int main() {
-   
+    
+    char user_selection;
+    
+    printf("Please select one of the following options\n");
+
+    printf("A: Specify filename to be imported\n");
+    printf("B: Display the total number of records in the file.\n");
+    printf("C: Find the date and time of the timeslot with the fewest steps\n");
+    printf("D: Find the date and time of the timeslot with the largest number of steps\n");
+    printf("E: Find the mean step count of all the records in the file\n");
+    printf("F: Find the longest continuous period where the step count is above 500 steps\n");
+    printf("Q: Exit\n");
+    
+    scanf("%c", &user_selection);
+    
+    switch(user_selection)
+    {
+
+        case 'A':
+        break;
+
+        case 'B':
+        break;
+
+        case 'C':
+        break;
+        
+        case 'D':
+        break;
+        
+        case 'E':
+        break;
+        
+        case 'F':
+        break;
+        
+        case 'Q': break;
+
+        default: break;
+
+    }
+
+    return 0;
+
 }

@@ -42,61 +42,71 @@ void tokeniseRecord(const char *input, const char *delimiter,
 
 // Complete the main function
 int main() {
-
-    char line[buffer_size];
-    char filename[buffer_size];
-    int recordcounter=0;
     
     char user_selection;
-    
+    char line[buffer_size];
+    char filename[buffer_size];
 
-    printf("A: Specify filename to be imported\n");
-    printf("B: Display the total number of records in the file.\n");
-    printf("C: Find the date and time of the timeslot with the fewest steps\n");
-    printf("D: Find the date and time of the timeslot with the largest number of steps\n");
-    printf("E: Find the mean step count of all the records in the file\n");
-    printf("F: Find the longest continuous period where the step count is above 500 steps\n");
-    printf("Q: Exit\n");
-    
-    scanf("%c", &user_selection);
-    
-    switch(user_selection)
+    while (1)
     {
-        case 'A': 
-        printf("Please enter the name of the data file: ");
+        printf("A: Specify filename to be imported\n");
+        printf("B: Display the total number of records in the file.\n");
+        printf("C: Find the date and time of the timeslot with the fewest steps\n");
+        printf("D: Find the date and time of the timeslot with the largest number of steps\n");
+        printf("E: Find the mean step count of all the records in the file\n");
+        printf("F: Find the longest continuous period where the step count is above 500 steps\n");
+        printf("Q: Exit\n");
+
         
+        user_selection = getchar();
+
+        // this gets rid of the newline character which the user will enter
+        // as otherwise this will stay in the stdin and be read next time
+        while (getchar() != '\n');
+
+        // switch statement to control the menu.
+        switch (user_selection)
+        {
+        case 'A':
+        printf("Please enter the name of the data file: ");
         fgets(line, buffer_size, stdin);
         scanf(line, "%s", filename);
         FILE *input = fopen("FitnessData_2023.csv", "r");
-        
         break;
 
         case 'B':
-    
+        
         break;
 
         case 'C':
-        break;
         
+        break;
+
         case 'D':
+         
         break;
-        
+
         case 'E':
-        break;
         
+        break;
+
         case 'F':
-        break;
         
-        case 'Q': 
-    return 0;
         break;
 
+        
+
+        case 'Q':
+            
+            break;
+
+        
         default:
-        
-        printf("Invalid choice, please choose one of the displayed options.\n");
-        break;
-
+            printf("Invalid choice, please choose one of the options displayed.\n");
+            break;
+        }
     }
     return 0;
+
 
 }

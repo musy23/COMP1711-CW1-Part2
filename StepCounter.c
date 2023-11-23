@@ -68,35 +68,43 @@ int main() {
         fgets(line, buffer_size, stdin);
         scanf(line, "%s", filename);
         FILE *input = fopen("FitnessData_2023.csv", "r");
-        
+        return 1;
         break;
 
         case 'B':
-    
+        return 0;
         break;
 
         case 'C':
+        return 0;
         break;
         
         case 'D':
+        return 0;
         break;
         
         case 'E':
+        return 0;
         break;
         
         case 'F':
+        return 0;
         break;
         
         case 'Q': 
-    return 0;
+        return 0;
         break;
 
         default:
         
         printf("Invalid choice, please choose one of the displayed options.\n");
+        return 0;
         break;
-
+    
+        return 0;
     }
-    return 0;
+
+    
+    
 
 }

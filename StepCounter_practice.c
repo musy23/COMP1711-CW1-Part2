@@ -78,16 +78,16 @@ int main()
             fgets(line, buffer_size, stdin);
             scanf(line, "%s", filename);
             input = fopen("FitnessData_2023.csv", "r");
-            if (input != NULL){
+            if (input == NULL){
                 printf("Error: Could not open file.\n");
                 return 1;
             }
 
-            tokeniseRecord(buffer_size,",",date, time, steps);
+            tokeniseRecord(line,",",date, time, steps);
                 strcpy(fitness[recordcounter].date, date);
                 strcpy(fitness[recordcounter].time, time);
                 fitness[recordcounter].steps = atoi(steps);
-            
+            return 1;
             break;
 
             case 'B':
@@ -102,6 +102,9 @@ int main()
             break;
 
             case 'C':
+            
+            for(int i = 0; i < numberofrecords, i++;)
+        
             break;
 
             case 'D':

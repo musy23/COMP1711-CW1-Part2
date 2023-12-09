@@ -52,76 +52,99 @@ int main()
     char user_selection;
     FILE *input = NULL;
     
-    int numberofrecords = 0;
-    float mean = 0;
+    int mean = 0;
+    int lowestvalue = 0;
+    int currentvalue = 0;
+    int highestvalue = 0;
 
     char date[11];
     char time[7];
     char steps[4];
+    
 
+    
     while (true)
     {
         printf("A: Specify filename to be imported\n");
         printf("B: Display the total number of records in the file.\n");
         printf("C: Find the date and time of the timeslot with the fewest steps\n");
-        printf("D: Find the date and time of the timeslot with the largest number of steps\n");
+        printf("D: Find the date and time of the timeslot with the most steps\n");
         printf("E: Find the mean step count of all the records in the file\n");
         printf("F: Find the longest continuous period where the step count is above 500 steps\n");
         printf("Q: Exit\n");
         
         user_selection = getchar();
+        while (getchar() != '\n');
 
         switch (user_selection)
         {
-            case 'A': 
+            case 'A':
+            case 'a':
             printf("Please enter the name of the data file: ");
             fgets(line, buffer_size, stdin);
-            scanf(line, "%s", filename);
-            input = fopen("FitnessData_2023.csv", "r");
-            if (input == NULL){
-                printf("Error: Could not open file.\n");
-                return 1;
-            }
-
-            tokeniseRecord(line,",",date, time, steps);
+            sscanf(line, "%s", filename);
+            input = fopen(filename, "r");
+            
+            while (fgets(line, buffer_size, input) != NULL){
+                tokeniseRecord(line,",",date, time, steps);
+                
                 strcpy(fitness[recordcounter].date, date);
                 strcpy(fitness[recordcounter].time, time);
                 fitness[recordcounter].steps = atoi(steps);
-            return 1;
-            break;
-
-            case 'B':
-            recordcounter = 0;
-            if (input != NULL){
-                while (fgets(line, sizeof(line), input) != NULL){
                 recordcounter++;
-                }
-                printf("Total records: %d\n", recordcounter);
 
+            if (input == NULL){
+                printf("Error, could not open file.\n");
+                return 1;
             }
-            break;
-
-            case 'C':
-            
-            for(int i = 0; i < numberofrecords, i++;)
+            }
         
             break;
 
+            case 'B':
+            case 'b':
+            recordcounter = 0;
+            input = fopen(filename, "r");
+            while (fgets(line, sizeof(line), input) != NULL){
+                    recordcounter++;
+                }
+                printf("Total records: %d\n", recordcounter);
+            break;
+
+            case 'C':
+            case 'c':
+            while(fgets(line, sizeof(line), input) != NULL){
+                if (numbers == 0) max = current;
+                else if (numbers > max)
+                
+                printf("Fewest steps: %s/%s \n", fitness[i].date, fitness[i].time);
+            }
+
+            break;
+
             case 'D':
+            case 'd':
+            
             break;
 
             case 'E':
-            for(int i = 0; i < numberofrecords, i++;){
+            case 'e':
+            for(int i = 0; i < recordcounter; i++){
                 mean += fitness[i].steps;
             }
-            mean/= numberofrecords;
-            printf("The mean step count of all the records in the file is %.2f\n", mean);
+            mean /= recordcounter;
+            
+            
+            printf("The mean step count of all the records in the file is %d.\n", mean);
             break;
 
             case 'F':
+            case 'f':
+
             break;
 
             case 'Q':
+            case 'q':
             fclose(input);
             exit(0);
 

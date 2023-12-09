@@ -3,8 +3,7 @@
 
 #include <stdio.h>
 
-
-int buffer_size = 100;
+int buffer_size = 150;
 
 // Define an appropriate struct
 typedef struct {

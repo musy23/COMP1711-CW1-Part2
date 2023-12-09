@@ -68,7 +68,7 @@ int main() {
         fgets(line, buffer_size, stdin);
         scanf(line, "%s", filename);
         FILE *input = fopen("FitnessData_2023.csv", "r");
-        return 1;
+        
         break;
 
         case 'B':

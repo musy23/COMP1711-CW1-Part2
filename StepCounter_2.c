@@ -37,12 +37,10 @@ void tokeniseRecord(const char *input, const char *delimiter,
 
                     }
 
-
-
-
 // Complete the main function
 int main() {
     
+    FITNESS_DATA fitness[1000]
     char user_selection;
     char line[buffer_size];
     char filename[buffer_size];

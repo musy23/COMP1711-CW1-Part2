@@ -4,11 +4,12 @@
 #include <stdio.h>
 
 int buffer_size = 150;
+#define MAX_TIME_LENGTH 6
 
 // Define an appropriate struct
 typedef struct {
 	char date[11];
-	char time[8];
+	char time[MAX_TIME_LENGTH];
 	int steps;
 } FITNESS_DATA;
 

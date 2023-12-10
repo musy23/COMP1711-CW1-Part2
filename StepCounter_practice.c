@@ -52,15 +52,22 @@ int main()
     char user_selection;
     FILE *input = NULL;
     
-    int mean = 0;
+    float mean = 0;
+    
     int lowestvalue = 0;
     int currentvalue = 0;
     int highestvalue = 0;
+    
+    int currentstart = 0;
+    int currentlength = 0;
+    int longeststart = 0;
+    int longestlength = 0;
+
 
     char date[11];
-    char time[7];
+    char time[6];
     char steps[4];
-    
+
 
     
     while (true)
@@ -84,16 +91,18 @@ int main()
             fgets(line, buffer_size, stdin);
             sscanf(line, "%s", filename);
             input = fopen(filename, "r");
-             printf("File successfully loaded.\n");
+            printf("File successfully loaded.\n");
             while (fgets(line, buffer_size, input) != NULL){
                 tokeniseRecord(line,",",date, time, steps);
-                printf("Debug: Date: %s, Time: %s, Steps: %s\n", date, time, steps);
-                
+           
                 strcpy(fitness[recordcounter].date, date);
                 strcpy(fitness[recordcounter].time, time);
                 fitness[recordcounter].steps = atoi(steps);
+           
                 recordcounter++;
-
+           
+                printf("Debug: Date: %s, Time: %s, Steps: %s\n", date, time, steps);
+           
             if (input == NULL){
                 printf("Error, could not open file.\n");
                 return 1;
@@ -141,14 +150,33 @@ int main()
             for(int i = 0; i < recordcounter; i++){
                 mean += fitness[i].steps;
             }
-            mean /= recordcounter;
-            
-            
-            printf("Mean step count: %d.\n", mean);
+            if (recordcounter > 0){
+                double meandouble = 
+            }
             break;
 
             case 'F':
             case 'f':
+            for (int i = 0; i < recordcounter; i++) {
+                if (fitness[i].steps > 500){
+
+                    currentlength++;
+                } else {
+                    if (currentlength > longestlength) {
+                        longestlength = currentlength;
+                        longeststart = currentstart;
+                    }
+                    currentstart = i + 1;
+                    currentlength = 0;
+                }
+            }
+            if (currentlength > longestlength){
+                longestlength = currentlength;
+                longeststart = currentstart;
+            }
+            printf("Longest period start: %s %s\n", fitness[longeststart].date, fitness[longeststart].time );
+            
+            printf("Longest period end: %s %s\n", fitness[longeststart + longestlength - 1].date, fitness[longeststart + longestlength - 1].time );
 
             break;
 

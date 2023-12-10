@@ -43,7 +43,7 @@ void tokeniseRecord(const char *input, const char *delimiter,
 int main() 
 {
 
-    FITNESS_DATA fitness[100];
+    FITNESS_DATA fitness[200];
     char line[buffer_size];
     char filename[buffer_size];
     
@@ -84,9 +84,10 @@ int main()
             fgets(line, buffer_size, stdin);
             sscanf(line, "%s", filename);
             input = fopen(filename, "r");
-            
+             printf("File successfully loaded.\n");
             while (fgets(line, buffer_size, input) != NULL){
                 tokeniseRecord(line,",",date, time, steps);
+                printf("Debug: Date: %s, Time: %s, Steps: %s\n", date, time, steps);
                 
                 strcpy(fitness[recordcounter].date, date);
                 strcpy(fitness[recordcounter].time, time);
@@ -113,18 +114,26 @@ int main()
 
             case 'C':
             case 'c':
-            while(fgets(line, sizeof(line), input) != NULL){
-                if (numbers == 0) max = current;
-                else if (numbers > max)
-                
-                printf("Fewest steps: %s/%s \n", fitness[i].date, fitness[i].time);
+            lowestvalue = fitness[0].steps;
+            for (int i = 1; i< recordcounter; i++){
+                if (fitness[i].steps < lowestvalue){
+                    lowestvalue = fitness[i].steps;
+                    currentvalue = i;
+                }
             }
-
+            printf("Fewest steps: %s %s\n",fitness[currentvalue].date, fitness[currentvalue].time);
             break;
 
             case 'D':
             case 'd':
-            
+            highestvalue = fitness[0].steps;
+            for (int i = 1; i < recordcounter; i++) {
+                if (fitness[i].steps > highestvalue) {
+                    highestvalue = fitness[i].steps;
+                    currentvalue = i;
+                }
+            }
+            printf("Most steps: %s %s\n", fitness[currentvalue].date, fitness[currentvalue].time);
             break;
 
             case 'E':
@@ -135,7 +144,7 @@ int main()
             mean /= recordcounter;
             
             
-            printf("The mean step count of all the records in the file is %d.\n", mean);
+            printf("Mean step count: %d.\n", mean);
             break;
 
             case 'F':

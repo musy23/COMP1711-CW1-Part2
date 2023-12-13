@@ -147,12 +147,6 @@ int main()
 
             case 'E':
             case 'e':
-            for(int i = 0; i < recordcounter; i++){
-                mean += fitness[i].steps;
-            }
-            if (recordcounter > 0){
-                double meandouble = 
-            }
             break;
 
             case 'F':

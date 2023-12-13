@@ -71,10 +71,10 @@ int main()
 
     char date[11];
     char time[6];
-    char steps[4];
+    char steps[10];
     
 
-    
+//user menu for options, used switch    
     while (true)
     {
         printf("A: Specify filename to be imported\n");
@@ -90,6 +90,8 @@ int main()
 
         switch (user_selection)
         {
+            //case A takes input of filename, opens and tokenizes array. 
+            //outputs error if the file cannot be opened.
             case 'A':
             case 'a':
             printf("Please enter the name of the data file: ");
@@ -100,21 +102,22 @@ int main()
                 printf("Error, could not open file.\n");
                 return 1;
             }
+            printf("File successfully loaded.\n");
             while (fgets(line, buffer_size, input) != NULL){
                 tokeniseRecord(line,",",date, time, steps);
-                printf("Debug: Date: %s, Time: %s, Steps: %s\n", date, time, steps);
-                
+
                 strcpy(fitness[recordcounter].date, date);
                 strcpy(fitness[recordcounter].time, time);
                 fitness[recordcounter].steps = atoi(steps);
+                
                 recordcounter++;
-                printf("File successfully loaded.\n");
+               
 
            
             }
         
             break;
-
+            //Case B prints total number of records, taken from task 1.
             case 'B':
             case 'b':
             recordcounter = 0;
@@ -125,6 +128,7 @@ int main()
                 printf("Total records: %d\n", recordcounter);
             break;
 
+            //case C finds lowest value, had to ask for help as time wasnt printing properly.
             case 'C':
             case 'c':
             lowestvalue = fitness[0].steps;
@@ -137,18 +141,20 @@ int main()
             printf("Fewest steps: %s %s\n",fitness[currentvalue].date, fitness[currentvalue].time);
             break;
 
+            //case D finds lowest value, same problem, asked for help in lab session, fixed by increasing size of steps array.
             case 'D':
             case 'd':
-            highestvalue = fitness[0].steps;
+            highestvalue = 0;
             for (int i = 1; i < recordcounter; i++) {
                 if (fitness[i].steps > highestvalue) {
                     highestvalue = fitness[i].steps;
                     currentvalue = i;
                 }
             }
-            printf("Most steps: %s %s\n", fitness[currentvalue].date, fitness[currentvalue].time);
+            printf("Largest steps: %s %s\n", fitness[currentvalue].date, fitness[currentvalue].time);
             break;
 
+            //Case E prints mean, asked TA for help in lab to write the code.
             case 'E':
             case 'e':
             for(int i = 0; i < recordcounter; i++){
